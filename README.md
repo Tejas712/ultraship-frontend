@@ -206,3 +206,21 @@ The areas I prioritized were:
 * Keeping financial data derived instead of duplicated
 
 These decisions helped keep the accounting logic predictable while preserving a complete financial history.
+
+⸻
+
+Manual Testing
+
+A step-by-step manual testing guide is included in TESTING.md.
+
+It covers the primary accounting workflows, including:
+
+* Creating and posting an invoice
+* Partial and full payments
+* Overpayment validation
+* Payment refunds
+* Refund validation
+* Concurrent payment handling
+* Expected ledger entries and account balances
+
+This document can be used to verify the application’s core financial behavior after running the seed data.
