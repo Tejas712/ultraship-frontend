@@ -5,10 +5,10 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build",
+    "codegen": "graphql-codegen --config codegen.yml",
+    "build": "npm run codegen && tsc -b && vite build",
     "lint": "eslint .",
-    "preview": "vite preview",
-    "codegen": "graphql-codegen --config codegen.yml"
+    "preview": "vite preview"
   },
   "dependencies": {
     "@apollo/client": "^4.2.6",
