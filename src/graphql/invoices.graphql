@@ -1,0 +1,123 @@
+fragment InvoiceAccountFields on InvoiceAccountModel {
+  id
+  name
+  type
+  currency
+  isActive
+}
+
+fragment InvoiceLineItemFields on InvoiceLineItemModel {
+  id
+  description
+  amountMinor
+  createdAt
+}
+
+fragment RefundFields on RefundModel {
+  id
+  externalRefundId
+  amountMinor
+  status
+  ledgerTransactionId
+  createdAt
+  updatedAt
+}
+
+fragment PaymentFields on PaymentModel {
+  id
+  externalPaymentId
+  amountMinor
+  status
+  refundedMinor
+  refundableAmount
+  ledgerTransactionId
+  createdAt
+  updatedAt
+  paymentAccount {
+    ...InvoiceAccountFields
+  }
+  refunds {
+    ...RefundFields
+  }
+}
+
+fragment InvoiceFields on InvoiceModel {
+  id
+  invoiceNumber
+  vendorName
+  status
+  currency
+  dueDate
+  ledgerTransactionId
+  totalMinor
+  paidMinor
+  refundedMinor
+  netPaidMinor
+  remainingMinor
+  createdAt
+  updatedAt
+  expenseAccount {
+    ...InvoiceAccountFields
+  }
+  payableAccount {
+    ...InvoiceAccountFields
+  }
+  lineItems {
+    ...InvoiceLineItemFields
+  }
+  payments {
+    ...PaymentFields
+  }
+}
+
+query Invoices($pagination: PaginationInput, $search: String, $status: InvoiceStatus) {
+  invoices(pagination: $pagination, search: $search, status: $status) {
+    totalCount
+    page
+    limit
+    offset
+    cursor
+    nextCursor
+    hasNextPage
+    hasPreviousPage
+    items {
+      ...InvoiceFields
+    }
+  }
+}
+
+query Invoice($id: String!) {
+  invoice(id: $id) {
+    ...InvoiceFields
+  }
+}
+
+mutation CreateInvoice($input: CreateInvoiceInput!) {
+  createInvoice(input: $input) {
+    ...InvoiceFields
+  }
+}
+
+mutation UpdateInvoice($id: String!, $input: CreateInvoiceInput!) {
+  updateInvoice(id: $id, input: $input) {
+    ...InvoiceFields
+  }
+}
+
+mutation SendInvoice($id: String!) {
+  sendInvoice(id: $id) {
+    ...InvoiceFields
+  }
+}
+
+mutation ApplyInvoicePayment($input: ApplyInvoicePaymentInput!) {
+  applyInvoicePayment(input: $input) {
+    ...PaymentFields
+  }
+}
+
+mutation CreateRefund($input: CreateRefundInput!) {
+  createRefund(input: $input) {
+    ...RefundFields
+  }
+}
