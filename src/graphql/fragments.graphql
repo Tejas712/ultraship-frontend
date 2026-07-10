@@ -1,0 +1,41 @@
+fragment AccountFields on AccountModel {
+  id
+  name
+  type
+  currency
+  isActive
+  balanceMinor
+  ledgerEntryCount
+  createdAt
+  updatedAt
+}
+
+fragment LedgerAccountFields on LedgerAccountModel {
+  id
+  name
+  type
+  currency
+  isActive
+}
+
+fragment LedgerEntryFields on LedgerEntryModel {
+  id
+  entryType
+  amountMinor
+  createdAt
+  account {
+    ...LedgerAccountFields
+  }
+}
+
+fragment LedgerTransactionFields on LedgerTransactionModel {
+  id
+  reference
+  description
+  transactionDate
+  createdAt
+  updatedAt
+  entries {
+    ...LedgerEntryFields
+  }
+}

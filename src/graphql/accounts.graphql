@@ -1,0 +1,31 @@
+#import "./fragments.graphql"
+
+query Accounts {
+  accounts {
+    ...AccountFields
+  }
+}
+
+query Account($id: String!) {
+  account(id: $id) {
+    ...AccountFields
+  }
+}
+
+mutation CreateAccount($input: CreateAccountInput!) {
+  createAccount(input: $input) {
+    ...AccountFields
+  }
+}
+
+mutation UpdateAccount($id: String!, $input: UpdateAccountInput!) {
+  updateAccount(id: $id, input: $input) {
+    ...AccountFields
+  }
+}
+
+mutation DeleteAccount($id: String!) {
+  deleteAccount(id: $id) {
+    ...AccountFields
+  }
+}

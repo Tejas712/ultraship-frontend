@@ -1,0 +1,29 @@
+#import "./fragments.graphql"
+
+query LedgerTransactions($pagination: PaginationInput, $reference: String) {
+  ledgerTransactions(pagination: $pagination, reference: $reference) {
+    totalCount
+    page
+    limit
+    offset
+    cursor
+    nextCursor
+    hasNextPage
+    hasPreviousPage
+    items {
+      ...LedgerTransactionFields
+    }
+  }
+}
+
+query LedgerTransaction($id: String!) {
+  ledgerTransaction(id: $id) {
+    ...LedgerTransactionFields
+  }
+}
+
+mutation RecordLedgerTransaction($input: RecordLedgerTransactionInput!) {
+  recordLedgerTransaction(input: $input) {
+    ...LedgerTransactionFields
+  }
+}
