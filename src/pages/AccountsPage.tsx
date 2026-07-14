@@ -141,7 +141,10 @@ export function AccountsPage() {
                   </TableCell>
                   <TableCell>{account.currency}</TableCell>
                   <TableCell className="text-right">
-                    <MoneyDisplay minor={account.balanceMinor} />
+                    <MoneyDisplay
+                      minor={account.balanceMinor}
+                      colorBySign
+                    />
                   </TableCell>
                   <TableCell>
                     <AccountActiveSwitch
